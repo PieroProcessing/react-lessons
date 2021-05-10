@@ -1,5 +1,6 @@
 import React from 'react' ;
-import Child from '../Child';
+import { Child } from '..';
+
 
 const Parent = ():JSX.Element => {
   console.log(`I'm parent`);

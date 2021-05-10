@@ -1,6 +1,5 @@
 import React from 'react' ;
-import Parent from '../Parent';
-import ParentSibling from '../ParentSibling';
+import { Parent, ParentSibling } from '..';
 
 const OverParent = ():JSX.Element => {
   console.log(`I'm overparent`);

@@ -1,20 +1,18 @@
-import React, { ChangeEvent } from "react";
-import NestedChild from "../NestedChild";
-import NestedSibling from "../NestedSibling";
+import React from "react";
+import Child from "../Child";
 
-interface Props {
-  [key: string]: any;
-}
 
-const  ParentSibling = (props: Props): JSX.Element =>{
-  console.log('i\'m parent  sibling')
-  const handleChange=({target:{ value, name}}: ChangeEvent<HTMLInputElement>):void => console.log('change event', value, name);
-  const handleSubmit=():void =>{};
+const  ParentSibling = (): JSX.Element =>{
+  console.log('I\'m parent  sibling')
   
-  return <form onSubmit={handleSubmit}>
-        i'm parent  sibling
-      <NestedChild onChange={handleChange}/>
-      {/* <NestedSibling/> */}
-  </form>;
+  return (
+    <>
+      <div>I'm parent sibling</div>
+      <Child />
+      <Child />
+    </>
+  )
+  
 }
+
 export default ParentSibling;

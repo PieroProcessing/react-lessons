@@ -1,13 +1,12 @@
 import React from 'react';
-import { Parent, ParentSibling } from './componets';
+import OverParent from './componets/OverParent';
 
 const  App = ():JSX.Element => {
-  console.log('i\'m app')
+  console.log('I\'m app')
 
   return (
     <>
-    <Parent/>
-    {/* <ParentSibling/> */}
+    <OverParent/>
     </>
   );
 }

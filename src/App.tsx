@@ -1,5 +1,5 @@
 import React from 'react';
-import OverParent from './componets/OverParent';
+import { OverParent } from './componets';
 
 const  App = ():JSX.Element => {
   console.log('I\'m app')

@@ -8,7 +8,13 @@ const Parent = ():JSX.Element => {
   return (
     <div className='border'>
       <div>I'm parent</div>
-      <Child />
+          {
+        ['test1', 'test2', 'test3'].map((el, index) => <Child 
+                key={index}
+                isActive={true}
+                element={{id: el, age: 46}}      
+                />)
+        }  
     </div>
   )
   

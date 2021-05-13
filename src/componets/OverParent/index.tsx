@@ -2,7 +2,6 @@ import React from 'react' ;
 import { Parent, ParentSibling, Child } from '../index'
 
 const OverParent = ():JSX.Element => {
-    console.log('this is OverParent message: ');
     const handleCallback = (txt: string)=> console.log('this is callback message: ', txt)
     return (
       <div className="row text-center ">

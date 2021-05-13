@@ -1,19 +1,29 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 
 interface Props {
   [key: string]: any;
   isActive: boolean;
-  element: { id: string; age: number };
+  element: { id: string | undefined; age: number };
 }
 
 const Child = (props: Props): JSX.Element => {
-    console.log("i'm child", props.element.id);
-    const [click, setClick] = useState<string>()
 
+    const [click, setClick] = useState<HTMLDivElement>()
+
+    useEffect(() => {
+      console.log(`i'm child in useEffect without dependency`)
+    }, []);
+    useEffect(() => {
+      console.log(`i'm child ${props.element.id} in useEffect with props dependency`)
+    }, [props]);
+    useEffect(() => {
+      console.log(`i'm child  in useEffect with click value :${click} dependency`)
+      if(!click) return;
+      click.classList.add("newclass");
+    }, [click]);
+    
     const handleClick = (event: MouseEvent<HTMLDivElement>): void => {
-      console.log("i have clicked", event);
-      setClick(event.currentTarget.innerHTML);
-      event.currentTarget.classList.add('newclass');
+      setClick(event.currentTarget);
     };
     return (
       <div id={props.element.id} className='col py-5 border' onClick={handleClick} style={{ backgroundColor: props.backgroundColor}}>

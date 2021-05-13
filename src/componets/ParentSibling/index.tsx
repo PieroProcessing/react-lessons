@@ -10,12 +10,11 @@ interface Props {
 const ParentSibling: React.FC<Props> = (
   props
 ): JSX.Element => {
-  console.log("i'm parent  sibling", props);
   const [input, setInput] = useState<{ name: string; value: string }>();
+  
   const handleChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>): void => {
-    console.log("input usefull value", name, value);
     setInput({ name, value });
   };
   return (

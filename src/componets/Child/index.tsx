@@ -1,7 +1,7 @@
 import { useState, MouseEvent, useEffect } from "react";
+import { ConvetionalProps } from "../../models";
 
-interface Props {
-  [key: string]: any;
+interface Props extends ConvetionalProps {
   isActive: boolean;
   element: { id: string | undefined; age: number };
 }

@@ -10,17 +10,17 @@ const Child = (props: Props): JSX.Element => {
 
     const [click, setClick] = useState<HTMLDivElement>()
 
-    useEffect(() => {
-      console.log(`i'm child in useEffect without dependency`)
-    }, []);
-    useEffect(() => {
-      console.log(`i'm child ${props.element.id} in useEffect with props dependency`)
-    }, [props]);
-    useEffect(() => {
-      console.log(`i'm child  in useEffect with click value :${click} dependency`)
-      if(!click) return;
-      click.classList.add("newclass");
-    }, [click]);
+    // useEffect(() => {
+    //   console.log(`i'm child in useEffect without dependency`)
+    // }, []);
+    // useEffect(() => {
+    //   console.log(`i'm child ${props.element.id} in useEffect with props dependency`)
+    // }, [props]);
+    // useEffect(() => {
+    //   console.log(`i'm child  in useEffect with click value :${click} dependency`)
+    //   if(!click) return;
+    //   click.classList.add("newclass");
+    // }, [click]);
     
     const handleClick = (event: MouseEvent<HTMLDivElement>): void => {
       setClick(event.currentTarget);

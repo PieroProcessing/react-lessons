@@ -11,13 +11,23 @@ const Parent = (props: ConvetionalProps):JSX.Element => {
 
    const apiCall = useCallback(
      async ( setter, url = undefined) =>{
-        console.log("🚀 ~ file: index.tsx ~ line 14 ~ url", url)
+        // console.log("🚀 ~ file: index.tsx ~ line 14 ~ url", url)
         const promise =await _get< ConvetionalProps >(url);
         setter(promise)
       },
      []);
+  const doSomething = ()=> console.log('i\'m doing something', element);
+  const fn = useCallback(doSomething, [element]);
+  let abort = true;
+  // useEffect(
+  //   ()=>{
+  //     doSomething()
+  //     return ()=>{ abort = false }
+  //   },[element]
+  // )
+
   useEffect(
-    ()=>{     
+    ()=>{       
       apiCall((data: ConvetionalProps) => setList(data));
     },[apiCall])
   // useEffect(
@@ -26,15 +36,17 @@ const Parent = (props: ConvetionalProps):JSX.Element => {
   //     apiCall();
   //   },
   //   [])
-  const handleNewList = (url: string)=>{
-     apiCall((data: ConvetionalProps) =>{      
-        setList(data.results)
+     
+  const listComponent = useMemo(
+    () => {
+    const handleNewList = (url: string) => {
+      apiCall((data: ConvetionalProps) => {
+        setList(data.results);
       }, url);
-  }
-  // const listComponent = useMemo(
-  //   () => <List data={list} callback={handleNewList} />,
-  //   [list]
-  // );
+    };
+    return <List data={list} callback={handleNewList} />},
+    [list, apiCall]
+  );
   const variableInParent = "optional variableInParent";
   return (
     <div className="border">
@@ -63,8 +75,8 @@ const Parent = (props: ConvetionalProps):JSX.Element => {
           variableInParent,
         }
       )}
-      <List data={list} callback={handleNewList} />
-      {/* {listComponent} */}
+      {/* <List data={list} callback={handleNewList} /> */}
+      {listComponent}
     </div>
   );
   

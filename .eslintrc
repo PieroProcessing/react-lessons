@@ -38,10 +38,11 @@
       "error"
     ],
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "error",
       {
         "vars": "all",
-        "args": "none"
+        "args": "none",
+        "varsIgnorePattern": "_"
       }
     ],
     "@typescript-eslint/no-unused-expressions": [
@@ -86,9 +87,8 @@
     "no-return-await": "off",
     "no-void": "off",
     "no-underscore-dangle": "off",
-    "no-console": [
-      "error"
-    ],
+    "no-console": "error",
+    "no-debugger": "error",
     "multiline-comment-style": [
       "error",
       "starred-block"
@@ -103,11 +103,6 @@
       }
     ],
     "no-inline-comments": "error",
-    "capitalized-comments": [
-      "error",
-      "always"
-    ],
-    "no-debugger": "error",
     "no-plusplus": [
       "error",
       {

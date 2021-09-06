@@ -19,13 +19,15 @@ export const extendCodec = <T>(base: T.Codec<T>, ...decoders: Array<(value: T) =
 const OrderId = extendCodec(T.unknown, (str: unknown) =>
   T.string.decode(str).isRight() ? T.Right(str) : T.Left(JSON.stringify({ type: 'id', message: 'is not a string' })),
 );
-// T.Left(idError: string) => T.Left(JSON.stringify({ type: 'id', message: idError })):
-// T.Right(valid) => T.Right(valid)
-// const OrderId = T.Codec.custom({
-//     decode: (input: unknown) => T.string.decode(input),//.isRight()? T.Right(input) : T.Left(JSON.stringify({ type: 'id', message: 'is not a string' })),
-//     encode: T.identity
-// });
-// type id = T.GetInterface<typeof OrderId>;
+/*
+ * T.Left(idError: string) => T.Left(JSON.stringify({ type: 'id', message: idError })):
+ * // T.Right(valid) => T.Right(valid)
+ * // const OrderId = T.Codec.custom({
+ * //     decode: (input: unknown) => T.string.decode(input),//.isRight()? T.Right(input) : T.Left(JSON.stringify({ type: 'id', message: 'is not a string' })),
+ * //     encode: T.identity
+ * // });
+ * // type id = T.GetInterface<typeof OrderId>;
+ */
 
 const EmailTest = new RegExp(
   "[a - z0 - 9!#$ %& '*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -73,18 +75,24 @@ export const validationOrderStep2: ValidationOrder = T.kleisli(
 );
 // let error: string[] = [];
 
-// const mapError = (e: string) => {
-//     console.log("🚀 ~ file: App.tsx ~ line 26 ~ mapError ~ e", error)
+/*
+ * const mapError = (e: string) => {
+ *     console.log("🚀 ~ file: App.tsx ~ line 26 ~ mapError ~ e", error)
+ */
 
-//     error.push(e)
-// }
+/*
+ *     error.push(e)
+ * }
+ */
 export const validationOrderStep4 = (unvalidated: unknown): T.Either<string, never> | T.Either<never, ValidatedOrderType> => {
   const validatedOrderId = OrderId.decode((unvalidated as UnvalidatedOrder).OrderId);
   const validatedCustomerName = ValidateName.decode((unvalidated as UnvalidatedOrder).CustomerInfo.name);
   const validatedCustomerEmail = ValidatedEmail.decode((unvalidated as UnvalidatedOrder).CustomerInfo.email);
   const validations = T.Either.lefts([validatedOrderId, validatedCustomerName, validatedCustomerEmail]);
-  // const
-  // console.log("🚀 ~ file: cart.ts ~ line 77 ~ validationOrderStep4 ~ validations", validations)
+  /*
+   * const
+   * console.log("🚀 ~ file: cart.ts ~ line 77 ~ validationOrderStep4 ~ validations", validations)
+   */
   return T.pipe(
     T.Either.of(unvalidated),
     T.chain(ValidatedOrder.decode),
@@ -94,79 +102,83 @@ export const validationOrderStep4 = (unvalidated: unknown): T.Either<string, nev
     }),
   );
 };
-// export const validationOrderStep3 = curry((unvalidated: unknown) => {
-//   const validatedOrderId = OrderId.decode((unvalidated as UnvalidatedOrder).OrderId);
-//   const validatedCustomerName = ValidateName.decode((unvalidated as UnvalidatedOrder).CustomerInfo.name).caseOf({
-//     Left: (e: string) => T.Left(e),
-//     Right: (valid) => T.Right(valid),
-//   });
-//   const validatedCustomerEmail = ValidatedEmail.decode((unvalidated as UnvalidatedOrder).CustomerInfo.email).caseOf({
-//     Left: (e: string) => T.Left(e),
-//     Right: (valid) => T.Right(valid),
-//   });
-//   // const res = pipe(
-//   //     validatedOrderId,
-//   //     T.chain((id) => pipe(
-//   //         validatedCustomerName,
-//   //         T.chain((name) => pipe(
-//   //             validatedCustomerEmail,
-//   //             T.chain(
-//   //                 (email) => T.Right({
-//   //                     OrderId: id,
-//   //                     CustomerInfo: {
-//   //                         name: name,
-//   //                         email: email
-//   //                     },
-//   //                     Key: null
-//   //                 })
-//   //             )
-//   //         ))
-//   //     )),
-//   // )
-//   return pipe<T.Either<string, never> | T.Either<never, ValidatedOrderType>>(
-//     validatedOrderId,
-//     T.caseOf({
-//       Left: (idError) => T.Left(idError),
-//       Right: (id) =>
-//         pipe(
-//           validatedCustomerName,
-//           T.caseOf({
-//             Left: (nameError) => T.Left(nameError),
-//             Right: (name) =>
-//               pipe(
-//                 validatedCustomerEmail,
-//                 T.caseOf({
-//                   Left: (emailError) => T.Left(emailError),
-//                   Right: (email) =>
-//                     T.Right({
-//                       OrderId: id,
-//                       CustomerInfo: {
-//                         name: name,
-//                         email: email,
-//                       },
-//                       Key: null,
-//                     }),
-//                 }),
-//               ),
-//           }),
-//         ),
-//     }),
-//   );
-//   // console.log("🚀 ~ file: cart.ts ~ line 98 ~ validationOrderStep3 ~ res", res)
-//   // return res;
-//   // return T.Either.of({
-//   //     OrderId: validatedOrderId,
-//   //     CustomerInfo: {
-//   //         name: validatedCustomerName,
-//   //         email: validatedCustomerEmail
-//   //     },
-//   //     Key: null
-//   // })
-// });
+/*
+ * export const validationOrderStep3 = curry((unvalidated: unknown) => {
+ *   const validatedOrderId = OrderId.decode((unvalidated as UnvalidatedOrder).OrderId);
+ *   const validatedCustomerName = ValidateName.decode((unvalidated as UnvalidatedOrder).CustomerInfo.name).caseOf({
+ *     Left: (e: string) => T.Left(e),
+ *     Right: (valid) => T.Right(valid),
+ *   });
+ *   const validatedCustomerEmail = ValidatedEmail.decode((unvalidated as UnvalidatedOrder).CustomerInfo.email).caseOf({
+ *     Left: (e: string) => T.Left(e),
+ *     Right: (valid) => T.Right(valid),
+ *   });
+ *   // const res = pipe(
+ *   //     validatedOrderId,
+ *   //     T.chain((id) => pipe(
+ *   //         validatedCustomerName,
+ *   //         T.chain((name) => pipe(
+ *   //             validatedCustomerEmail,
+ *   //             T.chain(
+ *   //                 (email) => T.Right({
+ *   //                     OrderId: id,
+ *   //                     CustomerInfo: {
+ *   //                         name: name,
+ *   //                         email: email
+ *   //                     },
+ *   //                     Key: null
+ *   //                 })
+ *   //             )
+ *   //         ))
+ *   //     )),
+ *   // )
+ *   return pipe<T.Either<string, never> | T.Either<never, ValidatedOrderType>>(
+ *     validatedOrderId,
+ *     T.caseOf({
+ *       Left: (idError) => T.Left(idError),
+ *       Right: (id) =>
+ *         pipe(
+ *           validatedCustomerName,
+ *           T.caseOf({
+ *             Left: (nameError) => T.Left(nameError),
+ *             Right: (name) =>
+ *               pipe(
+ *                 validatedCustomerEmail,
+ *                 T.caseOf({
+ *                   Left: (emailError) => T.Left(emailError),
+ *                   Right: (email) =>
+ *                     T.Right({
+ *                       OrderId: id,
+ *                       CustomerInfo: {
+ *                         name: name,
+ *                         email: email,
+ *                       },
+ *                       Key: null,
+ *                     }),
+ *                 }),
+ *               ),
+ *           }),
+ *         ),
+ *     }),
+ *   );
+ *   // console.log("🚀 ~ file: cart.ts ~ line 98 ~ validationOrderStep3 ~ res", res)
+ *   // return res;
+ *   // return T.Either.of({
+ *   //     OrderId: validatedOrderId,
+ *   //     CustomerInfo: {
+ *   //         name: validatedCustomerName,
+ *   //         email: validatedCustomerEmail
+ *   //     },
+ *   //     Key: null
+ *   // })
+ * });
+ */
 
-// T.match({
-//     Right: (validated: ValidatedOrderType) => validated,
-//     Left: (error: unknown) => typeof error === 'string' && T.parseError(error)
-// }))
+/*
+ * T.match({
+ *     Right: (validated: ValidatedOrderType) => validated,
+ *     Left: (error: unknown) => typeof error === 'string' && T.parseError(error)
+ * }))
+ */
 
 export type { ValidatedOrder, ValidatedOrderType };

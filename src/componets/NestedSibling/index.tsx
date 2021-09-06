@@ -5,7 +5,8 @@ interface Props {
   data: unknown[];
 }
 
-const NestedSibling = ({ data }: Props): JSX.Element => {
+const NestedSibling = ({ data, key }: Props): JSX.Element => {
+  // eslint-disable-next-line no-console
   console.log("i'm nested  sibling", data);
   return (
     <ul>

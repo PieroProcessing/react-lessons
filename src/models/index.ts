@@ -12,7 +12,8 @@ type AppleVarietyType = GetType<typeof AppleVariety>;
 
 export const isApple = (input: unknown): input is AppleVarietyType => AppleVariety.decode(input).isRight();
 
-const AppleCodec = (appleUnidentified: unknown): Maybe<AppleVarietyType> => Maybe.fromPredicate(() => isApple(appleUnidentified), appleUnidentified as AppleVarietyType);
+const AppleCodec = (appleUnidentified: unknown): Maybe<AppleVarietyType> =>
+  Maybe.fromPredicate(() => isApple(appleUnidentified), appleUnidentified as AppleVarietyType);
 
 export const AppleDecode = (appleUnidentified: unknown): Apples | undefined => AppleCodec(appleUnidentified)?.extract();
 
@@ -40,12 +41,13 @@ export const FruitVariety = Codec.custom<AppleVarietyType | BananaVarietyType>({
       .chainLeft((i) => BananaCodec(input).toEither('Nothing')),
   encode: identity,
 });
-// export const FruitVariety = Codec.custom<AppleVarietyType | BananaVarietyType>({
-//     decode: (input) => AppleVariety.decode(input).map(identity)
-//         .chainLeft(i => BananaVariety.decode(input).map(identity)),
-//     encode: identity
-// })
-
+/*
+ * export const FruitVariety = Codec.custom<AppleVarietyType | BananaVarietyType>({
+ * //     decode: (input) => AppleVariety.decode(input).map(identity)
+ * //         .chainLeft(i => BananaVariety.decode(input).map(identity)),
+ * //     encode: identity
+ * // })
+ */
 type FruitVarietyType = GetType<typeof FruitVariety>;
 
 export const checkFruit = (input: unknown): Apples | Bananas | undefined =>

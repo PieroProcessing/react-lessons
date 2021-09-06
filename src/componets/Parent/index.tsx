@@ -2,38 +2,47 @@ import React, { useEffect, useState } from 'react';
 import _get from '../../service';
 import { SwapiGetResponse } from '../../service/_get';
 import Child from '../Child';
-// interface Props {
-//   [key: string]: any;
-//   data: string[];
-//   isActive: boolean;
-//   element: { id: string; age: number };
-//   action: () => void;
-// //   callback: <T>(args:any) => T;
-// }
+/*
+ * / interface Props {
+ * //   [key: string]: any;
+ * //   data: string[];
+ * //   isActive: boolean;
+ * //   element: { id: string; age: number };
+ * //   action: () => void;
+ * // //   callback: <T>(args:any) => T;
+ * // }
+ */
 const c = 0;
 const Parent = (): JSX.Element => {
   const [counter, setCounter] = useState<number>(0);
   const [destroyChild, setDestroyChild] = useState<boolean>(false);
   const handleNumber = (e: React.MouseEvent): void => {
+    // eslint-disable-next-line no-console
     console.log('🚀 ~ file: index.tsx ~ line 23 ~ handleNumber ~ e', e);
     setCounter(counter + 1);
+    // eslint-disable-next-line no-console
     console.log("i'm parent  Counter ", counter);
   };
-  // const handleC = ():void =>{
-  //         c = c+1;
-  //         console.log("i'm parent  c  ", c );
-  // }
+  /*
+   * const handleC = ():void =>{
+   *         c = c+1;
+   *         console.log("i'm parent  c  ", c );
+   * }
+   */
   useEffect(() => {
     const apiCall = async (): Promise<void> => {
       const response = await _get<SwapiGetResponse>(null);
+      // eslint-disable-next-line no-console
       console.log('response api', response);
       const film = await _get(response.films);
+      // eslint-disable-next-line no-console
       console.log(' response film', film);
     };
     void apiCall();
   }, []);
 
   const fn = (n: number): void => {
+    // eslint-disable-next-line no-console
     console.log(`from child i've a number value: ${n}`);
   };
   return (
@@ -45,8 +54,10 @@ const Parent = (): JSX.Element => {
         )}
       </div>
       <div>
-        <label htmlFor="view"> are you sure you want to destroy child?
-          <input type="checkbox" id='view' name='view' onClick={(): void => setDestroyChild(!destroyChild)} />
+        <label htmlFor="view">
+          {' '}
+          are you sure you want to destroy child?
+          <input type="checkbox" id="view" name="view" onClick={(): void => setDestroyChild(!destroyChild)} />
         </label>
       </div>
       <div onClick={handleNumber}>

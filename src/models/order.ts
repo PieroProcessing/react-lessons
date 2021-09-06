@@ -18,7 +18,8 @@ export const EmptyCartCodec: Codec<FromType<EmptyCartList>> = Codec.interface({ 
 
 type EmptyCart = GetType<typeof EmptyCartCodec>;
 
-export const EmptyCartDecode = (cart: unknown): EmptyCartList | undefined => Maybe.fromPredicate(() => EmptyCartCodec.decode(cart).isRight(), cart as EmptyCartList).extract();
+export const EmptyCartDecode = (cart: unknown): EmptyCartList | undefined =>
+  Maybe.fromPredicate(() => EmptyCartCodec.decode(cart).isRight(), cart as EmptyCartList).extract();
 
 /**
  * Active
@@ -45,31 +46,37 @@ export const PaidCartDataDecode = (cart: unknown): PaidCartData | undefined =>
  */
 export const shoppingCart = (unknownCart: unknown): void =>
   match(unknownCart)
+    // eslint-disable-next-line no-console
     .with(EmptyCartDecode(unknownCart), (cart: EmptyCartList) => console.log('cart is empty', cart?.unpaidItems))
+    // eslint-disable-next-line no-console
     .with(ActiveCartDecode(unknownCart), (cart: ActiveCartData) => console.log('cart items are n: ', cart.unpaidItems.length))
+    // eslint-disable-next-line no-console
     .with(PaidCartDataDecode(unknownCart), (cart: PaidCartData) => console.log('paid are ', cart.payment))
     .run();
 export const shoppingCart2 = (unknownCart: unknown): void =>
   match(unknownCart)
     .when(
       (predicate): predicate is EmptyCart => EmptyCartCodec.decode(predicate).isRight(),
+      // eslint-disable-next-line no-console
       (cart: EmptyCart) => console.log(`cart2 is empty ${JSON.stringify(cart)}`),
     )
     .when(
       (predicate): predicate is ActiveCartData => ActiveCartDataCodec.decode(predicate).isRight(),
+      // eslint-disable-next-line no-console
       (cart: ActiveCartData) => console.log(`cart2 is active ${JSON.stringify(cart)}`),
     )
     .run();
 
 /**
  * point free
+ *
+ *
+ * // export const pointfree = (input: string):  =>
+ * //   pipe(
+ * //     Just(input),
+ * //     map((name) => name.toUpperCase()),
+ * //     filter((name) => name.length > 5),
+ * //     chain((name) => (Math.random() > 0.5 ? Just(`${name} lucky :)`) : Nothing)),
+ * //   );
  */
-
-// export const pointfree = (input: string):  =>
-//   pipe(
-//     Just(input),
-//     map((name) => name.toUpperCase()),
-//     filter((name) => name.length > 5),
-//     chain((name) => (Math.random() > 0.5 ? Just(`${name} lucky :)`) : Nothing)),
-//   );
 export type { Items, EmptyCart, ActiveCartData, PaidCartData };

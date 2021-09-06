@@ -13,7 +13,4 @@ export const a: PartialK<Value, 'email'> = {
   email: undefined,
 };
 
-export type {
-  Value,
-  PartialK,
-};
+export type { Value, PartialK };

@@ -2,7 +2,8 @@ module.exports = {
     extends: ['@commitlint/config-conventional'],
 	parserPreset: {
     	parserOpts: {
-        	issuePrefixes: ['Proj-']
+			headerPattern:  /^((feat|fix|docs|style|refactor|test|chore) (?:\[([^\A-Z)\s]+)\]): (.+))(\n{2}|$)(((?:^.+(\n|$))+(?:\n|$){0,2}?)+(?:(^.+(\n|$))+)|(?:^.+$))?/,
+      		headerCorrespondence: ['type', 'scope', 'subject']
       	}
     },
 	rules: {

@@ -53,7 +53,8 @@
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "pre-commit-lint": "yarn check-types && yarn lint-staged"
+    "pre-commit-lint": "yarn check-types && yarn lint-staged",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": [

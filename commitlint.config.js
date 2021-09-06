@@ -1,6 +1,10 @@
 module.exports = {
     extends: ['@commitlint/config-conventional'],
-	parserPreset: 'conventional-changelog-conventionalcommits',
+	parserPreset: {
+    	parserOpts: {
+        	issuePrefixes: []
+      	}
+    },
 	rules: {
 		'body-leading-blank': [1, 'always'],
 		'body-max-line-length': [2, 'always', 100],

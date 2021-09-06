@@ -1,20 +1,18 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent } from 'react';
 
 interface Props {
-  [key: string]: any;
-  onChange: (e:ChangeEvent<HTMLInputElement>)=> void
+  [key: string]: unknown;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NestedChild = (props: Props): JSX.Element => {
+const NestedChild = ({ onChange }: Props): JSX.Element => {
   console.log("i'm nested  child");
   return (
     <div>
-      <label>i'm input label in nested child</label>
-      <input 
-      type='text' 
-      name='questoInput' 
-      onChange={props.onChange}/>
+      <label htmlFor="questoInput">i'm input label in nested child
+        <input type="text" id="questoInput" name="questoInput" onChange={onChange} />
+      </label>
     </div>
   );
-}
+};
 export default NestedChild;

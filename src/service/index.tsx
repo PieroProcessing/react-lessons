@@ -1,3 +1,3 @@
-import {_get} from './_get';
+import { _get } from './_get';
 
-export default(_get)
+export default _get;

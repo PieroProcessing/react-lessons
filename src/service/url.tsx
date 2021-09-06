@@ -1,1 +1,1 @@
-export const domain = "https://swapi.dev/api/";
+export const domain = 'https://swapi.dev/api/';

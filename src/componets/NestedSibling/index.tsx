@@ -1,13 +1,17 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
-  [key: string]: any;
+  [key: string]: unknown;
   data: unknown[];
 }
 
-export default function NestedSibling(props: Props): JSX.Element {
-   console.log("i'm nested  sibling");
-  return <ul>
-    <li></li>
-  </ul>;
-}
+const NestedSibling = ({ data }: Props): JSX.Element => {
+  console.log("i'm nested  sibling", data);
+  return (
+    <ul>
+      <li />
+    </ul>
+  );
+};
+
+export default NestedSibling;

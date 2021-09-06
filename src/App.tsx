@@ -1,15 +1,12 @@
 import React from 'react';
-import { Parent, ParentSibling } from './componets';
+import { RHookForm } from './componets/ReactHookForm';
 
-const  App = ():JSX.Element => {
-  console.log('i\'m app')
-
+const App = (): JSX.Element => {
   return (
-    <>
-    <Parent/>
-    {/* <ParentSibling/> */}
-    </>
+    <div>
+      <RHookForm /> 
+    </div>
   );
-}
+};
 
 export default App;

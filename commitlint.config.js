@@ -1,1 +1,1 @@
-module.exports = {extends: ['@commitlint/config-patternplate']};
+module.exports = {extends: ['@commitlint/config-conventional']};

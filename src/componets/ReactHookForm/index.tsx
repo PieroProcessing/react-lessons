@@ -7,10 +7,7 @@ export const RHookForm = (): JSX.Element => {
     watch,
   } = useForm();
   const input = watch((value, { name, type }) => (name === 'amount' ? value : 'NaN'));
-  input.add(() => {
-    // eslint-disable-next-line no-console
-    console.log('value');
-  });
+  
 
   // eslint-disable-next-line no-console
   console.log('🚀 ~ file: index.tsx ~ line 7 ~ RHookForm ~ input', input);

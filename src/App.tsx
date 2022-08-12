@@ -1,13 +1,15 @@
-import React from 'react';
-import { RHookForm } from './componets/ReactHookForm';
+/* eslint-disable react/jsx-indent */
+import './assets/scss/index.scss';
+import { ComponentLiteral } from './componets/ComponentLiterals';
+
 
 const App = (): JSX.Element => {
-  
   return (
-    <div>
-      <RHookForm />
-    </div>
+    <>
+     <ComponentLiteral />
+    </>
   );
+
 };
 
 export default App;

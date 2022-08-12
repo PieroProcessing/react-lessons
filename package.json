@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
+    "bcsoft-react-library": "git+https://bcsoft-Internal@dev.azure.com/bcsoft-Internal/BC%20Framework/_git/BCsoftReactLibrary",
+    "node-sass": "^7.0.1",
     "purifree-ts": "^0.16.1",
     "purify-ts": "^1.0.0",
     "purify-ts-extra-codec": "^0.6.0",
@@ -41,7 +43,6 @@
     "eslint-webpack-plugin": "^2.4.1",
     "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
-    "node-sass": "^5.0.0",
     "prettier-eslint": "^12.0.0",
     "prettier-eslint-cli": "^5.0.0"
   },
